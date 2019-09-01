@@ -1,0 +1,66 @@
+<html>
+
+<head>
+
+<body>
+    <h1>File Storage </h1>
+    <h3>File system storage is chargable. Follow the below steps to create a file system and mount it in Ubundu.</h3>
+    <div>
+        <ul>
+            <li>
+                Go to <i>Storage -> Filestorage ->Create Instance</i>
+            </li>
+            <li>
+                Provide an instance id (any name)
+            </li>
+            <li>
+                Instance tier is standard and select a region and all its zones
+            </li>
+            <li>
+                Provide a file share name and create it
+            </li>
+            <li>
+                <a>Create</a> 2 ubundu VM's and mount the above created file system using the procedure listed below.
+                <ul>
+                    <li>
+                        Get the <a>remote access</a> of the ubundu VMs using putty or directly from from google console
+                        by clicking the SSH
+                    </li>
+                    <li>
+                        <i>sudo apt update</i>
+                    </li>
+                    <li>
+                        <i> sudo apt install nfs-common -y</i> , This command installs the nfs file system in ubundu
+                    </li>
+                    <li>
+                        <i> sudo mkdir /memo </i> , This creates a folder named memo in VM, for the second VM the name
+                        can be nemo.
+                    </li>
+                    <li> Run the command <i> sudo vim /etc/fstab </i> this opens up an editor
+                    </li>
+                    <li> Copy the below path into the file as the last line.
+                        <p>10.146.31.146:/web /memo nfs auto,nofail,noatime,nolock,intr,tcp,actimeo=1800 0 0 </p>
+                        <p>IP address should be copied from the file store created in google console <i>:wq to save the
+                                file enter the exit the file</i> </p>
+                        </i>
+                    </li>
+                    <li><i> sudo mount -a </i> to mount the file storage
+                    </li>
+                    <li><i> df -h </i> this is to see the mounted files </li>
+                </ul>
+            </li>
+            <li>
+                Create a folder/directory using mkdir in the newly mounted folder nemo/memo
+            </li>
+            <li>
+                Create a file using the command <i>sudo touch note.txt </i> in the newly created folder
+            </li>
+            <li>
+                Use <I>ll</I> to list and check whether both vm having the same list of files/folders, this should be
+                from nemo/memo.
+            </li>
+        </ul>
+    </div>
+    </head>
+
+</html>
